@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCC Attendance - Record Attendance</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-users"></i> NCC Attendance System</h1>
+            <p>Record Daily Attendance</p>
+        </header>
+
+        <div class="date-selector">
+            <div class="form-group">
+                <label for="attendanceDate">
+                    <i class="fas fa-calendar-alt"></i> Select Date:
+                </label>
+                <input type="date" id="attendanceDate" required>
+            </div>
+        </div>
+
+        <div class="attendance-section">
+            <div class="section-header">
+                <h2>Cadet Attendance</h2>
+                <div class="bulk-actions">
+                    <button type="button" id="markAllPresent" class="btn btn-success">
+                        <i class="fas fa-check-circle"></i> Mark All Present
+                    </button>
+                    <button type="button" id="markAllAbsent" class="btn btn-danger">
+                        <i class="fas fa-times-circle"></i> Mark All Absent
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table id="attendanceTable" class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Cadet Name</th>
+                            <th>Rank</th>
+                            <th>Attendance</th>
+                            <th>Reason (if Absent)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <!-- Dynamic content will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button type="button" id="saveAttendance" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Attendance
+            </button>
+            <button type="button" id="viewAttendance" class="btn btn-secondary" style="display: none;">
+                <i class="fas fa-eye"></i> View Attendance
+            </button>
+        </div>
+
+        <div id="notification" class="notification" style="display: none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize the attendance page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('attendanceDate').value = today;
+            
+            // Load attendance data
+            loadAttendanceForDate(today);
+            
+            // Event listeners
+            document.getElementById('attendanceDate').addEventListener('change', function() {
+                loadAttendanceForDate(this.value);
+            });
+            
+            document.getElementById('markAllPresent').addEventListener('click', markAllPresent);
+            document.getElementById('markAllAbsent').addEventListener('click', markAllAbsent);
+            document.getElementById('saveAttendance').addEventListener('click', saveAttendance);
+            document.getElementById('viewAttendance').addEventListener('click', function() {
+                const selectedDate = document.getElementById('attendanceDate').value;
+                window.location.href = `view.html?date=${selectedDate}`;
+            });
+        });
+    </script>
+</body>
+</html>

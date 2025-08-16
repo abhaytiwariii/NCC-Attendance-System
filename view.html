@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCC Attendance - View Records</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-chart-line"></i> NCC Attendance Records</h1>
+            <p>View and Export Attendance Data</p>
+        </header>
+
+        <div class="view-controls">
+            <div class="date-info">
+                <h2 id="selectedDateDisplay">
+                    <i class="fas fa-calendar"></i> Attendance for: <span id="displayDate"></span>
+                </h2>
+            </div>
+            
+            <div class="control-buttons">
+                <button type="button" id="editAttendance" class="btn btn-warning">
+                    <i class="fas fa-edit"></i> Edit Attendance
+                </button>
+                <button type="button" id="downloadCSV" class="btn btn-success">
+                    <i class="fas fa-download"></i> Download CSV
+                </button>
+                <button type="button" id="backToHome" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
+            </div>
+        </div>
+
+        <div class="attendance-summary">
+            <div class="summary-card present">
+                <i class="fas fa-check-circle"></i>
+                <div class="summary-info">
+                    <span class="summary-label">Present</span>
+                    <span class="summary-count" id="presentCount">0</span>
+                </div>
+            </div>
+            <div class="summary-card absent">
+                <i class="fas fa-times-circle"></i>
+                <div class="summary-info">
+                    <span class="summary-label">Absent</span>
+                    <span class="summary-count" id="absentCount">0</span>
+                </div>
+            </div>
+            <div class="summary-card total">
+                <i class="fas fa-users"></i>
+                <div class="summary-info">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-count" id="totalCount">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="attendance-records" id="attendanceRecords">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+
+        <div id="notification" class="notification" style="display: none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize the view page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get date from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedDate = urlParams.get('date') || new Date().toISOString().split('T')[0];
+            
+            // Display the selected date
+            displayAttendanceRecords(selectedDate);
+            
+            // Event listeners
+            document.getElementById('editAttendance').addEventListener('click', function() {
+                window.location.href = `index.html?date=${selectedDate}`;
+            });
+            
+            document.getElementById('downloadCSV').addEventListener('click', function() {
+                downloadAttendanceCSV(selectedDate);
+            });
+            
+            document.getElementById('backToHome').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
