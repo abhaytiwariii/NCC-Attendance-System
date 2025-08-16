@@ -19,6 +19,14 @@
                 <h2 id="selectedDateDisplay">
                     <i class="fas fa-calendar"></i> Attendance for: <span id="displayDate"></span>
                 </h2>
+                <div class="date-navigation">
+                    <button type="button" id="prevDay" class="btn btn-sm btn-secondary">
+                        <i class="fas fa-chevron-left"></i> Previous Day
+                    </button>
+                    <button type="button" id="nextDay" class="btn btn-sm btn-secondary">
+                        <i class="fas fa-chevron-right"></i> Next Day
+                    </button>
+                </div>
             </div>
             
             <div class="control-buttons">
@@ -27,6 +35,12 @@
                 </button>
                 <button type="button" id="downloadCSV" class="btn btn-success">
                     <i class="fas fa-download"></i> Download CSV
+                </button>
+                <button type="button" id="downloadPDF" class="btn btn-info">
+                    <i class="fas fa-file-pdf"></i> Print Report
+                </button>
+                <button type="button" id="viewDashboard" class="btn btn-warning">
+                    <i class="fas fa-chart-bar"></i> Analytics
                 </button>
                 <button type="button" id="backToHome" class="btn btn-secondary">
                     <i class="fas fa-home"></i> Back to Home
@@ -83,6 +97,22 @@
             
             document.getElementById('downloadCSV').addEventListener('click', function() {
                 downloadAttendanceCSV(selectedDate);
+            });
+            
+            document.getElementById('downloadPDF').addEventListener('click', function() {
+                window.print();
+            });
+            
+            document.getElementById('prevDay').addEventListener('click', function() {
+                navigateToDate(selectedDate, -1);
+            });
+            
+            document.getElementById('nextDay').addEventListener('click', function() {
+                navigateToDate(selectedDate, 1);
+            });
+            
+            document.getElementById('viewDashboard').addEventListener('click', function() {
+                window.location.href = 'dashboard.html';
             });
             
             document.getElementById('backToHome').addEventListener('click', function() {

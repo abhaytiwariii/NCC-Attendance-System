@@ -23,6 +23,15 @@
             </div>
         </div>
 
+        <div class="search-section" id="searchSection" style="display: none;">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search cadets by name or rank..." class="search-input">
+                <button type="button" id="closeSearch" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
         <div class="attendance-section">
             <div class="section-header">
                 <h2>Cadet Attendance</h2>
@@ -36,11 +45,32 @@
                 </div>
             </div>
             
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="yearFilter">
+                        <i class="fas fa-graduation-cap"></i> Filter by Year:
+                    </label>
+                    <select id="yearFilter" class="filter-select">
+                        <option value="all">All Years</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                    </select>
+                </div>
+                
+
+                
+                <div class="filter-stats" id="filterStats">
+                    <span class="filter-count">Showing: <strong id="cadetCount">20</strong> cadets</span>
+                </div>
+            </div>
+            
             <div class="table-container">
                 <table id="attendanceTable" class="attendance-table">
                     <thead>
                         <tr>
                             <th>Cadet Name</th>
+                            <th>Year</th>
                             <th>Rank</th>
                             <th>Attendance</th>
                             <th>Reason (if Absent)</th>
@@ -53,12 +83,32 @@
             </div>
         </div>
 
+        <div class="attendance-summary-preview" id="attendanceSummary" style="display: none;">
+            <div class="summary-preview">
+                <h3><i class="fas fa-chart-bar"></i> Quick Summary</h3>
+                <div class="summary-stats">
+                    <span class="stat present"><i class="fas fa-check"></i> Present: <strong id="previewPresent">0</strong></span>
+                    <span class="stat absent"><i class="fas fa-times"></i> Absent: <strong id="previewAbsent">0</strong></span>
+                    <span class="stat total"><i class="fas fa-users"></i> Total: <strong id="previewTotal">15</strong></span>
+                </div>
+            </div>
+        </div>
+
         <div class="action-buttons">
             <button type="button" id="saveAttendance" class="btn btn-primary">
                 <i class="fas fa-save"></i> Save Attendance
             </button>
             <button type="button" id="viewAttendance" class="btn btn-secondary" style="display: none;">
                 <i class="fas fa-eye"></i> View Attendance
+            </button>
+            <button type="button" id="clearAll" class="btn btn-warning">
+                <i class="fas fa-eraser"></i> Clear All
+            </button>
+            <button type="button" id="searchCadets" class="btn btn-info">
+                <i class="fas fa-search"></i> Search
+            </button>
+            <button type="button" id="viewDashboard" class="btn btn-warning">
+                <i class="fas fa-chart-bar"></i> Analytics
             </button>
         </div>
 
@@ -87,6 +137,15 @@
             document.getElementById('viewAttendance').addEventListener('click', function() {
                 const selectedDate = document.getElementById('attendanceDate').value;
                 window.location.href = `view.html?date=${selectedDate}`;
+            });
+            
+            document.getElementById('clearAll').addEventListener('click', clearAllAttendance);
+            document.getElementById('searchCadets').addEventListener('click', toggleSearch);
+            document.getElementById('closeSearch').addEventListener('click', toggleSearch);
+            document.getElementById('searchInput').addEventListener('input', filterCadets);
+            document.getElementById('yearFilter').addEventListener('change', applyFilters);
+            document.getElementById('viewDashboard').addEventListener('click', function() {
+                window.location.href = 'dashboard.html';
             });
         });
     </script>

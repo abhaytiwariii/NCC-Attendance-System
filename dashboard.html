@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCC Attendance - Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-chart-bar"></i> NCC Attendance Analytics</h1>
+            <p>Comprehensive Attendance Statistics and Trends</p>
+        </header>
+
+        <div class="dashboard-controls">
+            <div class="control-buttons">
+                <button type="button" id="refreshData" class="btn btn-primary">
+                    <i class="fas fa-sync"></i> Refresh Data
+                </button>
+                <button type="button" id="exportReport" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i> Export Report
+                </button>
+                <button type="button" id="resetData" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Reset Data
+                </button>
+                <button type="button" id="backToHome" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-overview">
+            <div class="overview-card total-days">
+                <div class="card-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Total Days Recorded</div>
+                    <div class="card-value" id="totalDays">0</div>
+                </div>
+            </div>
+
+            <div class="overview-card avg-attendance">
+                <div class="card-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Average Attendance</div>
+                    <div class="card-value" id="avgAttendance">0%</div>
+                </div>
+            </div>
+
+            <div class="overview-card perfect-days">
+                <div class="card-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Perfect Attendance Days</div>
+                    <div class="card-value" id="perfectDays">0</div>
+                </div>
+            </div>
+
+            <div class="overview-card most-active">
+                <div class="card-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Best Performing Year</div>
+                    <div class="card-value" id="mostActive">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-sections">
+            <div class="section-left">
+                <div class="analytics-section">
+                    <h3><i class="fas fa-chart-line"></i> Attendance Trends</h3>
+                    <div class="trend-chart" id="trendChart">
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-area"></i>
+                            <p>Attendance trends will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-section">
+                    <h3><i class="fas fa-graduation-cap"></i> Year-wise Performance</h3>
+                    <div class="year-stats" id="yearStats"></div>
+                </div>
+            </div>
+
+            <div class="section-right">
+                <div class="analytics-section">
+                    <h3><i class="fas fa-award"></i> Top Performers</h3>
+                    <div class="top-performers" id="topPerformers"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-records">
+            <h3><i class="fas fa-history"></i> Recent Attendance Records</h3>
+            <div class="records-timeline" id="recordsTimeline"></div>
+        </div>
+
+        <div id="notification" class="notification" style="display: none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+            
+            // Event listeners
+            document.getElementById('refreshData').addEventListener('click', loadDashboardData);
+            document.getElementById('exportReport').addEventListener('click', exportAnalyticsReport);
+            document.getElementById('resetData').addEventListener('click', resetDashboardData);
+            document.getElementById('backToHome').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
