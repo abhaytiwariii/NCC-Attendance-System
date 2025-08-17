@@ -27,7 +27,7 @@ This project allows cadets' attendance to be recorded **date-wise**, with suppor
 ---
 
 ## 🌐 Live Demo
-👉 [Click here to view the project](https://abhaytiwariii.github.io/ncc-attendance-system/)  
+👉 [Click here to view the project]https://abhaytiwariii.github.io/NCC-Attendance-System/
 
 ---
 
