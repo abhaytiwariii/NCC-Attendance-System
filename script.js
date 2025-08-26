@@ -116,7 +116,7 @@ const cadets = [
   },
   {
     id: crypto.randomUUID(),
-    name: "Khusi Verma",
+    name: "Khusi Chute",
     rank: "Corporal",
     year: 3,
   },
@@ -135,7 +135,7 @@ const cadets = [
   {
     id: crypto.randomUUID(),
     name: "Priyanka Shahu",
-    rank: "Company Quartermaster Sergeant Major",
+    rank: "Company Quartermaster Sergeant",
     year: 3,
   },
   {
@@ -155,7 +155,7 @@ const cadets = [
   {
     id: crypto.randomUUID(),
     name: "Abhay Tiwari",
-    rank: "Company Quartermaster Sergeant Major",
+    rank: "Company Quartermaster Sergeant",
     year: 3,
   },
   {
